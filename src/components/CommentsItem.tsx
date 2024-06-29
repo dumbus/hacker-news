@@ -32,11 +32,14 @@ const CommentItem: React.FC<CommentItemProps> = ({ commentId }) => {
   };
 
   return (
-    <div style={{ marginLeft: '20px', marginBottom: '10px' }}>
-      <p>
+    <div
+      className="comments-wrapper"
+      style={{ marginLeft: '20px', marginBottom: '10px' }}
+    >
+      <p className="list-item-p">
         <strong>{comment.author}</strong>
-        <p>Score: {comment.score}</p>
       </p>
+      <p className="list-item-p">Score: {comment.score}</p>
       <div dangerouslySetInnerHTML={{ __html: cleanHTML(comment.text) }} />
       {comment.kids && comment.kids.length > 0 && (
         <div>

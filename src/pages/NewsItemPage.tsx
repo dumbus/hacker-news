@@ -40,11 +40,11 @@ const NewsItemPage: React.FC = () => {
   }
 
   return (
-    <>
+    <div>
       <NewsItem storyData={storyData} />
       <button onClick={handleComments}>Show comments</button>
       {showComments ? <CommentsList storyId={storyData.id} /> : ''}
-    </>
+    </div>
   );
 };
 

@@ -65,7 +65,9 @@ const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
 
   const storiesContent = (
     <>
-      <button onClick={handleRefresh}>Refresh</button>
+      <div className="button-container">
+        <button onClick={handleRefresh}>Refresh</button>
+      </div>
       {storiesToShow.map((storyData, index) => {
         const storyIndex = (page - 1) * 15 + index + 1;
 
@@ -77,13 +79,17 @@ const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
           />
         );
       })}
-      <button onClick={handleLoadMore}>Load More</button>
+      <div className="button-container">
+        <button className="list-button" onClick={handleLoadMore}>
+          Load More
+        </button>
+      </div>
     </>
   );
 
   return (
     <>
-      <h2>News Page</h2>
+      <h2 className="header">News Page</h2>
       {loading && stories.length === 0 ? <div>Loading...</div> : storiesContent}
     </>
   );

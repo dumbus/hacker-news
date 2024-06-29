@@ -22,10 +22,20 @@ const NewsItem: React.FC<NewsItemProps> = ({ storyData, index }) => {
           {title}
         </Link>
       </h2>
-      <p>Url: {url}</p>
-      <p>Score: {score}</p>
-      <p>By: {by}</p>
-      {kids && <p>Comments: {kids.length}</p>}
+      <p className="list-item-p">
+        Original Url:
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ marginLeft: '5px' }}
+        >
+          {url}
+        </a>
+      </p>
+      <p className="list-item-p">Score: {score}</p>
+      <p className="list-item-p">By: {by}</p>
+      {kids && <p className="list-item-p">Comments: {kids.length}</p>}
     </div>
   );
 };

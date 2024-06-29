@@ -8,12 +8,14 @@ import NewsItemPage from './pages/NewsItemPage';
 const App = () => {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<NewsPage />} />
-        <Route path="/news" element={<NewsPage />} />
-        <Route path="/news/:id" element={<NewsItemPage />} />
-      </Routes>
+      <div className="container">
+        <Header />
+        <Routes>
+          <Route path="/" element={<NewsPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/news/:id" element={<NewsItemPage />} />
+        </Routes>
+      </div>
     </Router>
   );
 };

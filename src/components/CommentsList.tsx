@@ -26,7 +26,7 @@ const CommentsList: React.FC<CommentsListProps> = ({ storyId }) => {
 
   return (
     <div>
-      <h3>Comments</h3>
+      <h3 className="header">Comments</h3>
       {commentsIds.length > 0 ? (
         commentsIds.map((commentId) => (
           <CommentsItem key={commentId} commentId={commentId} />

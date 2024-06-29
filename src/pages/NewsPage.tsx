@@ -12,8 +12,8 @@ const NewsPage: React.FC = () => {
   };
 
   return (
-    <>
-      <div>
+    <div>
+      <div className="story-type">
         <button onClick={() => handleTypeChange('newstories')}>
           New Stories
         </button>
@@ -25,7 +25,7 @@ const NewsPage: React.FC = () => {
         </button>
       </div>
       <NewsList storyType={storyType} />
-    </>
+    </div>
   );
 };
 
