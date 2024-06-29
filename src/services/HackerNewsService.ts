@@ -1,4 +1,4 @@
-import { Story } from '../types/interfaces';
+import { Story, Comment } from '../types/interfaces';
 
 class HackerNewsService {
   private _apiBaseUrl = 'https://hacker-news.firebaseio.com/v0';
@@ -54,6 +54,30 @@ class HackerNewsService {
     const stories = await Promise.all(storiesPromises);
 
     return stories.filter((story) => story !== null) as Story[];
+  };
+
+  public getCommentDetails = async (id: number): Promise<Comment | null> => {
+    const url = `${this._apiBaseUrl}/item/${id}.json`;
+    const comment = await this.getResource(url);
+
+    if (!comment) {
+      return null;
+    }
+
+    return {
+      id: comment.id,
+      text: comment.text,
+      score: comment.score || 0,
+      author: comment.by,
+      kids: comment.kids || []
+    };
+  };
+
+  public getComments = async (ids: number[]): Promise<Comment[]> => {
+    const commentsPromises = ids.map((id) => this.getCommentDetails(id));
+    const comments = await Promise.all(commentsPromises);
+
+    return comments.filter((comment) => comment !== null) as Comment[];
   };
 }
 

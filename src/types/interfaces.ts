@@ -6,3 +6,11 @@ export interface Story {
   by: string;
   kids: number[];
 }
+
+export interface Comment {
+  id: number;
+  text: string;
+  score: number;
+  author: string;
+  kids: number[];
+}
