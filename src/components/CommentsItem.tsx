@@ -24,7 +24,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ commentId }) => {
   }, [commentId]);
 
   if (!comment) {
-    return <p>Loading...</p>;
+    return <p>Comment is Loading...</p>;
   }
 
   const cleanHTML = (html: string) => {

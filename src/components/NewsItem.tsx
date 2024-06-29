@@ -1,12 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Story } from '../types/interfaces';
 
-import CommentsList from './CommentsList';
-
 interface NewsItemProps {
   storyData: Story;
-  index: number;
+  index?: number;
 }
 
 const NewsItem: React.FC<NewsItemProps> = ({ storyData, index }) => {
@@ -15,13 +14,18 @@ const NewsItem: React.FC<NewsItemProps> = ({ storyData, index }) => {
   return (
     <div>
       <h2>
-        {index}. {title}
+        {index ? index : ''}{' '}
+        <Link
+          to={`/news/${id}`}
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          {title}
+        </Link>
       </h2>
       <p>Url: {url}</p>
       <p>Score: {score}</p>
       <p>By: {by}</p>
       {kids && <p>Comments: {kids.length}</p>}
-      <CommentsList storyId={id} />
     </div>
   );
 };
