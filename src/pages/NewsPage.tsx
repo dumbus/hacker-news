@@ -12,25 +12,20 @@ const NewsPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <header>
-        <h1>Hacker News</h1>
-        <div>
-          <button onClick={() => handleTypeChange('newstories')}>
-            New Stories
-          </button>
-          <button onClick={() => handleTypeChange('beststories')}>
-            Best Stories
-          </button>
-          <button onClick={() => handleTypeChange('topstories')}>
-            Top Stories
-          </button>
-        </div>
-      </header>
-      <main>
-        <NewsList storyType={storyType} />
-      </main>
-    </div>
+    <>
+      <div>
+        <button onClick={() => handleTypeChange('newstories')}>
+          New Stories
+        </button>
+        <button onClick={() => handleTypeChange('beststories')}>
+          Best Stories
+        </button>
+        <button onClick={() => handleTypeChange('topstories')}>
+          Top Stories
+        </button>
+      </div>
+      <NewsList storyType={storyType} />
+    </>
   );
 };
 
