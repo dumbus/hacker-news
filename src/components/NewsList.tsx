@@ -4,41 +4,60 @@ import NewsItem from './NewsItem';
 
 import HackerNewsService from '../services/HackerNewsService';
 
-import { Story } from '../types/interfaces';
+import { Story, StoryType } from '../types/interfaces';
 
-type StoryType = 'beststories' | 'newstories' | 'topstories';
+interface NewsListProps {
+  storyType: StoryType;
+}
 
-const NewsList: React.FC = () => {
+const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
   const [stories, setStories] = useState<Story[]>([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [type, setType] = useState<StoryType>('newstories');
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   const hackerNewsService = new HackerNewsService();
 
   const fetchStories = useCallback(async () => {
     setLoading(true);
 
-    const data = await hackerNewsService.getStories();
+    const data = await hackerNewsService.getStories(storyType, page);
 
     setStories(data);
     setLoading(false);
-  }, [type]);
+  }, [storyType, page]);
 
   useEffect(() => {
     fetchStories();
 
-    const interval = setInterval(fetchStories, 30000);
-    return () => clearInterval(interval);
+    const id = setInterval(fetchStories, 30000);
+    setIntervalId(id);
+    return () => clearInterval(id);
   }, [fetchStories]);
+
+  const handleRefresh = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+
+    fetchStories();
+    const newIntervalId = setInterval(fetchStories, 30000);
+    setIntervalId(newIntervalId);
+  };
 
   const storiesToShow = stories.slice(0, (page + 1) * 15);
 
+  const storiesContent = storiesToShow.map((storyData) => (
+    <NewsItem key={storyData.id} storyData={storyData} />
+  ));
+
   return (
     <>
-      {storiesToShow.map((storyData) => (
-        <NewsItem key={storyData.id} storyData={storyData} />
-      ))}
+      <h2>News Page</h2>
+      <div>
+        <button onClick={handleRefresh}>Refresh</button>{' '}
+      </div>
+      {loading ? <div>Loading...</div> : storiesContent}
     </>
   );
 };

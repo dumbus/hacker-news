@@ -14,3 +14,5 @@ export interface Comment {
   author: string;
   kids: number[];
 }
+
+export type StoryType = 'beststories' | 'newstories' | 'topstories';

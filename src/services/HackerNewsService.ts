@@ -38,9 +38,9 @@ class HackerNewsService {
   };
 
   public getStories = async (
+    type = 'newstories',
     page = 1,
-    pageSize = 15,
-    type = 'newstories'
+    pageSize = 15
   ): Promise<Story[]> => {
     const ids = await this.getStoriesIds(type);
     const startIndex = (page - 1) * pageSize;
