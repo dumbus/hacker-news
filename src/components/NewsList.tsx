@@ -33,6 +33,10 @@ const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
     return () => clearInterval(id);
   }, [fetchStories]);
 
+  useEffect(() => {
+    setLoading(true);
+  }, [storyType]);
+
   const handleRefresh = () => {
     if (intervalId) {
       clearInterval(intervalId);
