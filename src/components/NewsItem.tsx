@@ -6,14 +6,17 @@ import CommentsList from './CommentsList';
 
 interface NewsItemProps {
   storyData: Story;
+  index: number;
 }
 
-const NewsItem: React.FC<NewsItemProps> = ({ storyData }) => {
+const NewsItem: React.FC<NewsItemProps> = ({ storyData, index }) => {
   const { id, title, url, score, by, kids } = storyData;
 
   return (
     <div>
-      <h2>{title}</h2>
+      <h2>
+        {index}. {title}
+      </h2>
       <p>Url: {url}</p>
       <p>Score: {score}</p>
       <p>By: {by}</p>
