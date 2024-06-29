@@ -19,6 +19,8 @@ const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
   const hackerNewsService = new HackerNewsService();
 
   const fetchStories = useCallback(async () => {
+    setLoading(true);
+
     const data = await hackerNewsService.getStories(storyType, page);
 
     setStories(data);
@@ -34,7 +36,9 @@ const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
   }, [fetchStories]);
 
   useEffect(() => {
+    setStories([]);
     setLoading(true);
+    setPage(1);
   }, [storyType]);
 
   const handleRefresh = () => {
@@ -42,6 +46,7 @@ const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
       clearInterval(intervalId);
     }
 
+    setStories([]);
     setLoading(true);
 
     fetchStories();
@@ -78,7 +83,7 @@ const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
   return (
     <>
       <h2>News Page</h2>
-      {loading ? <div>Loading...</div> : storiesContent}
+      {loading && stories.length === 0 ? <div>Loading...</div> : storiesContent}
     </>
   );
 };

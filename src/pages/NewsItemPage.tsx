@@ -12,6 +12,7 @@ const NewsItemPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(true);
   const [storyData, setStoryData] = useState<Story | null>(null);
+  const [showComments, setShowComments] = useState(false);
 
   const hackerNewsService = new HackerNewsService();
 
@@ -26,6 +27,10 @@ const NewsItemPage: React.FC = () => {
     fetchStory();
   }, [id]);
 
+  const handleComments = () => {
+    setShowComments((prevState) => !prevState);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -37,7 +42,8 @@ const NewsItemPage: React.FC = () => {
   return (
     <>
       <NewsItem storyData={storyData} />
-      <CommentsList storyId={storyData.id} />
+      <button onClick={handleComments}>Show comments</button>
+      {showComments ? <CommentsList storyId={storyData.id} /> : ''}
     </>
   );
 };
