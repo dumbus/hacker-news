@@ -55,6 +55,7 @@ const NewsList: React.FC<NewsListProps> = ({ storyType }) => {
   };
 
   const handleLoadMore = () => {
+    setStories([]);
     setLoading(true);
     window.scrollTo(0, 0);
     setPage((prevPage) => prevPage + 1);
